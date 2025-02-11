@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+require('dotenv').config(); // Load environment variables
 
 const app = express();
 app.use(bodyParser.json());
@@ -11,8 +12,8 @@ app.use(cors());
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'pratiksindhiya103@gmail.com', // Replace with your email
-        pass: 'ehgw ijij rkop cmws', // Replace with your email password or app-specific password
+        user: process.env.EMAIL_USER, // Use environment variable
+        pass: process.env.EMAIL_PASS, // Use environment variable
     },
 });
 
@@ -21,8 +22,8 @@ app.post('/submit', (req, res) => {
     const { name, email, phone, role, school, program, location } = req.body;
 
     const mailOptions = {
-        from: 'your-email@gmail.com',
-        to: 'recipient-email@gmail.com', // Replace with the recipient's email
+        from: email,
+        to: "pratiksindhiya3@gmail.com", // Use environment variable
         subject: 'New Form Submission',
         text: `
             Name: ${name}
@@ -47,7 +48,7 @@ app.post('/submit', (req, res) => {
 });
 
 // Start the server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

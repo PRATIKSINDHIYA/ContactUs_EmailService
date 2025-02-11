@@ -253,7 +253,7 @@
             const formData = { name, email, phone, role, school, program, location };
 
             // Send form data to the backend
-            axios.post('http://localhost:3000/submit', formData)
+            axios.post('https://contactusemailservice.onrender.com/submit', formData)
                 .then(response => {
                     alert('Form submitted successfully!');
                     document.getElementById('form').reset(); // Reset the form
